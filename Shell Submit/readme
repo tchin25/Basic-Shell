@@ -1,0 +1,35 @@
+This is a basic shell that can be used to navigate and modify a file system.
+The internal commands include:
+  cd - Shows current directory.
+  cd <directory> - Changes current directory to absolute path.
+  cd ./<directory> - Changes current directory to relative path.
+  dir - List contents of current directory.
+  dir <directory> - List contents taken from absolute path.
+  dir ./<directory> - list contents taken from relative path.
+  clr - Clears the screen.
+  environ - Lists environment variables.
+  echo <command> - Prints <command>.
+  help - Displays this user manual.
+  pause - Pauses shell until 'Enter' is pressed.
+  quit - Quits the shell.
+  exit - Quits the shell.
+  & - If appended at the end of command, runs command in background.
+
+External commands include ls, wc, cat, and others.
+
+Special operation can be used in conjunction with the commands.
+These operations require a space separating it from the commands.
+  <command1> | <command2> - Pipe. Puts the output of <command1> into the input of <command 2>.
+  <command> > <file> - Output redirect. Records the output of <command> into file. Nothing is printed on screen.
+  <command> < <file> - Input redirect. Inputs the text in <file> line by line into <command>.
+  <command> < <file1> > <file2> - Inputs <file1> into <command> and records the output into <file2>.
+  <command> > <file1> < <file2> - Inputs <file2> into <command> and records the output into <file1>.
+
+Batch execution from file can be achieved by running the shell with a batchfile.
+  i.e.: ./myshell batchfile
+
+Debug mode can be achieved by making the shell code with a DEBUG flag. This creates and run a debug executable.
+  i.e.: make DEBUG
+
+Running a batchfile in debug mode can now be achieved.
+  i.e.: ./debug batchfile

@@ -1,0 +1,10 @@
+echo hello
+echo world&
+cd
+dir
+ls | wc
+echo testing > testtext
+wc < testtext
+wc < testtext > wordcount
+echo Hello has 5 letters >> wordcount
+quit

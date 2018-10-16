@@ -1,0 +1,25 @@
+The command parser is interleaved within the entire program and is unable to be extracted into a separate file, but the general pseudocode is as followed:
+
+Procedure parse(char* input)
+  If last character in input is a '&'
+    Replace '&' with "\0"
+    Fork
+  If is a child or no child was created
+    Detect if special operation exists
+      If so, tokenize input by special operation
+        Check which tokens are files
+        Do the correct wiring of I/O
+        parse(commands)
+      If not, split input by command and arguments
+        If command matches with any internal commands, execute
+        If not, tokenize arguments into an array and pass it with command into execvp()
+
+Every internal command has been tested and outputs the expected results.
+Information about the commands are in the readme.
+
+The special operation tokenizer is special in that it calls itself when tokenizing an input and output operation.
+This means that it can be modified to recursively tokenize multiple special operations if required.
+
+The command tokenizer is special in that it does not tokenize the arguments until it has to.
+Since all internal commands don't have multiple arguments, it means it only tokenizes for execvp().
+Because of this, minor details, like the number of spaces in the echo command, are preserved.
