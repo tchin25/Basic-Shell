@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
             if(end != NULL){
                 strcpy(end, "\0");
             }
-            printf("TUShell> %s\n", line);
+            printf("%s> %s\n",currentDirectory, line);
 
             //Checks if run in background
             pid_t id = -1;
@@ -83,7 +83,7 @@ int main(int argc, char** argv) {
 
         while (true){
             char *input = (char*) calloc(100, sizeof(char));
-            printf("TUShell> ");
+            printf("%s> ", currentDirectory);
             fgets(input, 100, stdin);
 
             //Replaces \n with \0
@@ -179,6 +179,18 @@ void parseCommand(char *input) {
     }else if(strcmp(command, "echo") == 0){
         printf("%s\n", arguments);
     }else if(strcmp(command, "help") == 0){
+        char* path = NULL;
+        if (strcmp(currentDirectory, shellDirectory) != 0){
+            path = (char*) calloc(strlen(currentDirectory)-1, sizeof(char));
+            strcpy(path, currentDirectory);
+            char goTo[4] = "cd ";
+            strcat(goTo, shellDirectory);
+#ifdef DEBUG
+            printf("Going to: %s\n", shellDirectory);
+#endif
+            parseCommand(goTo);
+        }
+
         FILE* fp = fopen("readme", "r");
         char line[100];
         size_t length = 100;
@@ -189,6 +201,15 @@ void parseCommand(char *input) {
             while(fgets(line, length, fp)){ //Prints each line
                 printf("%s", line);
             }
+        }
+
+        if(path != NULL){
+            char returnTo[4] = "cd ";
+            strcat(returnTo, path);
+#ifdef DEBUG
+            printf("Returning to: %s\n", path);
+#endif
+            parseCommand(returnTo);
         }
     }else{
         pid_t id = fork();
