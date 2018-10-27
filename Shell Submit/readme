@@ -28,8 +28,8 @@ These operations require a space separating it from the commands.
 Batch execution from file can be achieved by running the shell with a batchfile.
   i.e.: ./myshell batchfile
 
-Debug mode can be achieved by making the shell code with a DEBUG flag. This creates and run a debug executable.
-  i.e.: make DEBUG
+Debug mode can be achieved by making the shell code with a debug flag. This creates and run a debug executable.
+  i.e.: make debug
 
 Running a batchfile in debug mode can now be achieved.
   i.e.: ./debug batchfile
